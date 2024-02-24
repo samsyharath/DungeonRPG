@@ -15,7 +15,15 @@ public partial class MoveState : Node
         if (characterNode.direction == Vector2.Zero)
         {
             characterNode.stateMachineNode.SwitchState<IdleState>();
+            return;
         }
+
+        characterNode.Velocity = new(characterNode.direction.X, 0, characterNode.direction.Y);
+        characterNode.Velocity *=5;
+
+        characterNode.MoveAndSlide();
+
+        characterNode.Flip();
     }
     public override void _Notification(int what)
     {
