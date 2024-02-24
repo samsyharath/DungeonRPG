@@ -1,7 +1,7 @@
-[gd_scene load_steps=37 format=3 uid="uid://cbsi0g0i54wdv"]
+[gd_scene load_steps=38 format=3 uid="uid://cbsi0g0i54wdv"]
 
 [ext_resource type="Texture2D" uid="uid://bure7xdop0irk" path="res://Assets/Sprites/Characters/Player/Running/Running_006.png" id="1_5lx55"]
-[ext_resource type="Script" path="res://Scripts/Characters/Player/Player.cs" id="1_30dks"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/Player/Player.cs" id="1_s48de"]
 [ext_resource type="Texture2D" uid="uid://b0umebmxikdv8" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_000.png" id="2_aqonj"]
 [ext_resource type="Texture2D" uid="uid://iq561fmkf3fj" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_001.png" id="3_0dfos"]
 [ext_resource type="Texture2D" uid="uid://cm2hek6lols21" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_002.png" id="4_sevii"]
@@ -31,8 +31,9 @@
 [ext_resource type="Texture2D" uid="uid://dadjr5aqw25jf" path="res://Assets/Sprites/Characters/Player/Running/Running_009.png" id="28_pb0xc"]
 [ext_resource type="Texture2D" uid="uid://8wjnp3qe3uv8" path="res://Assets/Sprites/Characters/Player/Running/Running_010.png" id="29_1y5ii"]
 [ext_resource type="Texture2D" uid="uid://dxmedc87q26gw" path="res://Assets/Sprites/Characters/Player/Running/Running_011.png" id="30_tlsxj"]
-[ext_resource type="Script" path="res://Scripts/Characters/Player/IdleState.cs" id="32_hrdal"]
-[ext_resource type="Script" path="res://Scripts/Characters/Player/MoveState.cs" id="33_a3s3t"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/Player/IdleState.cs" id="32_uuct7"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/Player/MoveState.cs" id="33_0bx8v"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/StateMachine.cs" id="34_n8m6d"]
 
 [sub_resource type="Animation" id="Animation_ekj3x"]
 resource_name = "Idle"
@@ -74,10 +75,11 @@ _data = {
 "Move": SubResource("Animation_0gqm0")
 }
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("animPlayerNode", "spriteNode")]
-script = ExtResource("1_30dks")
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("animPlayerNode", "spriteNode", "stateMachineNode")]
+script = ExtResource("1_s48de")
 animPlayerNode = NodePath("AnimationPlayer")
 spriteNode = NodePath("Sprite3D")
+stateMachineNode = NodePath("StateMachine")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 texture = ExtResource("2_aqonj")
@@ -88,7 +90,12 @@ libraries = {
 }
 
 [node name="IdleState" type="Node" parent="."]
-script = ExtResource("32_hrdal")
+script = ExtResource("32_uuct7")
 
 [node name="MoveState" type="Node" parent="."]
-script = ExtResource("33_a3s3t")
+script = ExtResource("33_0bx8v")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("currentState", "states")]
+script = ExtResource("34_n8m6d")
+currentState = NodePath("../IdleState")
+states = [NodePath("../IdleState"), NodePath("../MoveState")]
