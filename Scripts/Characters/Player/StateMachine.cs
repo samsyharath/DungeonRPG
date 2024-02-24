@@ -11,18 +11,21 @@ public partial class StateMachine : Node
         currentState.Notification(5001);
     }
 
-    public void SwitchState<T>() 
+    public void SwitchState<T>()
     {
         Node newState = null;
 
-        foreach (Node state in states) {
-            if (state is T) {
+        foreach (Node state in states)
+        {
+            if (state is T)
+            {
                 newState = state;
             }
         }
 
         if (newState == null) { return; }
 
+        currentState.Notification(5002);
         currentState = newState;
         currentState.Notification(5001);
     }
