@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://cbsi0g0i54wdv"]
+[gd_scene load_steps=47 format=3 uid="uid://cbsi0g0i54wdv"]
 
 [ext_resource type="Texture2D" uid="uid://bure7xdop0irk" path="res://Assets/Sprites/Characters/Player/Running/Running_006.png" id="1_5lx55"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Player/Player.cs" id="1_s48de"]
@@ -100,13 +100,17 @@ _data = {
 "Move": SubResource("Animation_0gqm0")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_57k3a"]
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("AnimPlayerNode", "SpriteNode", "StateMachineNode")]
+collision_layer = 2
 script = ExtResource("1_s48de")
 AnimPlayerNode = NodePath("AnimationPlayer")
 SpriteNode = NodePath("Sprite3D")
 StateMachineNode = NodePath("StateMachine")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0025
 texture = ExtResource("30_tlsxj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -124,13 +128,15 @@ script = ExtResource("32_uuct7")
 
 [node name="MoveState" type="Node" parent="StateMachine"]
 script = ExtResource("33_0bx8v")
-speed = 12.7
 
 [node name="DashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("dashTimerNode")]
 script = ExtResource("40_vlhn4")
 dashTimerNode = NodePath("Timer")
-speed = 20.3
 
 [node name="Timer" type="Timer" parent="StateMachine/DashState"]
 wait_time = 0.604
 one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.93, 0, 0, 0, 0.93, 0, 0, 0, 0.93, 0, 0.227143, 0)
+shape = SubResource("CapsuleShape3D_57k3a")
