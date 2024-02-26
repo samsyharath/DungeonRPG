@@ -1,10 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvxvnkve44rfi"]
+[gd_scene load_steps=7 format=3 uid="uid://cvxvnkve44rfi"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/Main.cs" id="1_d5wgp"]
 [ext_resource type="PackedScene" uid="uid://cbsi0g0i54wdv" path="res://Scenes/Characters/Player/player.tscn" id="2_g6nv6"]
 [ext_resource type="MeshLibrary" uid="uid://dw4nhsf7vmui8" path="res://Resources/tiles.tres" id="3_bafdq"]
+[ext_resource type="PackedScene" uid="uid://c4jrkptapjbya" path="res://Scenes/Characters/Enemy/enemy.tscn" id="4_1cf0y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ix3ki"]
+
+[sub_resource type="Curve3D" id="Curve3D_0qg18"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.23899, 0.00170517, -2.14888, 0, 0, 0, 0, 0, 0, 2.56493, -0.00191784, 2.34247, 0, 0, 0, 0, 0, 0, 5.40951, 0.00105858, -1.47068, 0, 0, 0, 0, 0, 0, -2.77668, -0.000776291, 1.04887, 0, 0, 0, 0, 0, 0, 0.23899, 0.00170517, -2.14888),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_d5wgp")
@@ -20,7 +28,7 @@ transform = Transform3D(1, 0, 0, 0, 0.994703, -0.102793, 0, 0.102793, 0.994703, 
 [node name="FloorGridMap" type="GridMap" parent="Environment"]
 mesh_library = ExtResource("3_bafdq")
 data = {
-"cells": PackedInt32Array(65531, 65532, 1441792, 65532, 65533, 1441792, 65534, 65535, 1441792, 65535, 0, 1441792, 0, 0, 1441792, 1, 1, 1441792, 1, 0, 1441792, 0, 1, 1441792, 65535, 1, 1441792, 65534, 0, 1441792, 65533, 65535, 1441792, 65533, 0, 1441792, 65534, 1, 1441792, 65533, 1, 1441792, 65532, 0, 1441792, 65532, 65535, 1441792, 65531, 65535, 1441792, 65531, 65534, 1441792, 65530, 65533, 1441792, 65530, 65532, 1441792, 65532, 65532, 1441792, 65531, 65533, 1441792, 65532, 65534, 1441792, 65533, 65533, 1441792, 65534, 65533, 1441792, 65535, 65533, 1441792, 65535, 65534, 1441792, 0, 65534, 1441792, 65535, 65535, 1441792, 0, 65535, 1441792, 1, 65535, 1441792, 2, 65534, 1441792, 2, 65533, 1441792, 1, 65533, 1441792, 0, 65533, 1441792, 1, 65534, 1441792, 65533, 65534, 1441792, 65534, 65534, 1441792, 2, 65535, 1441792, 3, 65535, 1441792, 4, 65535, 1441792, 2, 0, 1441792, 3, 65534, 1441792, 3, 0, 1441792, 2, 1, 1441792)
+"cells": PackedInt32Array(65532, 65533, 1441792, 65534, 65535, 1441792, 65535, 0, 1441792, 0, 0, 1441792, 1, 1, 1441792, 1, 0, 1441792, 0, 1, 1441792, 65535, 1, 1441792, 65534, 0, 1441792, 65533, 65535, 1441792, 65533, 0, 1441792, 65534, 1, 1441792, 65533, 1, 1441792, 65532, 0, 1441792, 65532, 65534, 1441792, 65533, 65533, 1441792, 65534, 65533, 1441792, 65535, 65533, 1441792, 65535, 65534, 1441792, 0, 65534, 1441792, 65535, 65535, 1441792, 0, 65535, 1441792, 1, 65535, 1441792, 2, 65534, 1441792, 2, 65533, 1441792, 1, 65533, 1441792, 0, 65533, 1441792, 1, 65534, 1441792, 65533, 65534, 1441792, 65534, 65534, 1441792, 2, 65535, 1441792, 3, 65535, 1441792, 4, 65535, 1441792, 2, 0, 1441792, 3, 65534, 1441792, 3, 0, 1441792, 2, 1, 1441792, 65532, 65535, 0, 65532, 1, 0)
 }
 
 [node name="WallGridMap" type="GridMap" parent="Environment"]
@@ -34,4 +42,14 @@ data = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 5.9799, -6.46362, 1.77228, -0.766656)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/InvisibleWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.87047, -1.58116, 0, 0.104554)
 shape = SubResource("BoxShape3D_ix3ki")
+
+[node name="Enemy" parent="." instance=ExtResource("4_1cf0y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.53432, 1.87087, -1.71802)
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Path3D" type="Path3D" parent="Enemies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.194, 1.09, -0.941)
+curve = SubResource("Curve3D_0qg18")
