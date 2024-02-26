@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://15u8p65yhqvu"]
 
 [ext_resource type="PackedScene" uid="uid://d0bpx6jbyytdi" path="res://Assets/Models/Dungeon/gltf/floor_tile_small.gltf.glb" id="1_uy51f"]
-[ext_resource type="PackedScene" uid="uid://w34nenf0auxo" path="res://Assets/Models/Dungeon/gltf/wall_half_endcap_sloped.gltf.glb" id="5_jt2r4"]
-[ext_resource type="PackedScene" uid="uid://dhb57g30b8o10" path="res://Assets/Models/Dungeon/gltf/wall_broken.gltf.glb" id="6_kymrf"]
-[ext_resource type="PackedScene" uid="uid://dn2s3vip6xxfa" path="res://Assets/Models/Dungeon/gltf/wall_sloped.gltf.glb" id="7_4xn81"]
+[ext_resource type="PackedScene" uid="uid://w34nenf0auxo" path="res://Assets/Models/Dungeon/gltf/wall_open_scaffold.gltf.glb" id="5_jt2r4"]
+[ext_resource type="PackedScene" uid="uid://dhb57g30b8o10" path="res://Assets/Models/Dungeon/gltf/wall_corner.gltf.glb" id="6_kymrf"]
+[ext_resource type="PackedScene" uid="uid://dn2s3vip6xxfa" path="res://Assets/Models/Dungeon/gltf/wall_Tsplit.gltf.glb" id="7_4xn81"]
 [ext_resource type="PackedScene" uid="uid://uuwqv4s3334b" path="res://Assets/Models/Dungeon/gltf/wall_doorway_scaffold.glb" id="7_06qp0"]
 [ext_resource type="PackedScene" uid="uid://6dlansehvt68" path="res://Assets/Models/Dungeon/gltf/wall.gltf.glb" id="7_e3yr3"]
 [ext_resource type="PackedScene" uid="uid://6hwileejly6q" path="res://Assets/Models/Dungeon/gltf/stairs.gltf.glb" id="8_lio0t"]
