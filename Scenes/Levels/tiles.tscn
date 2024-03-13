@@ -17,7 +17,7 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.86579, 0, 4.21882)
 
 [node name="wall_corner_gltf" parent="." instance=ExtResource("6_kymrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.90717, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6165, 0, 0)
 
 [node name="wall_Tsplit_gltf" parent="." instance=ExtResource("7_4xn81")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.83001, 0, -9.80385)

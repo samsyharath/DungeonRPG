@@ -113,7 +113,7 @@ StateMachineNode = NodePath("StateMachine")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 pixel_size = 0.0025
-texture = ExtResource("30_tlsxj")
+texture = ExtResource("33_pw5fv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -129,7 +129,7 @@ script = ExtResource("32_uuct7")
 
 [node name="MoveState" type="Node" parent="StateMachine"]
 script = ExtResource("33_0bx8v")
-speed = 12.7
+speed = 8.0
 
 [node name="DashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("dashTimerNode")]
 script = ExtResource("40_vlhn4")
@@ -137,7 +137,7 @@ dashTimerNode = NodePath("Timer")
 speed = 20.3
 
 [node name="Timer" type="Timer" parent="StateMachine/DashState"]
-wait_time = 0.604
+wait_time = 0.197
 one_shot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
