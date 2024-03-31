@@ -1,10 +1,11 @@
-[gd_scene load_steps=103 format=3 uid="uid://c4jrkptapjbya"]
+[gd_scene load_steps=106 format=3 uid="uid://c4jrkptapjbya"]
 
 [ext_resource type="Texture2D" uid="uid://b1nyi4ofylkwf" path="res://Assets/Sprites/Characters/Enemy Knight/Idle/0_Demons_of_Darkness_Idle_000.png" id="1_b4kxi"]
 [ext_resource type="Texture2D" uid="uid://d3copoooe8k8g" path="res://Assets/Sprites/Characters/Enemy Knight/Move/0_Demons_of_Darkness_Walking_022.png" id="1_gn2l0"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Enemy/Enemy.cs" id="1_l2res"]
 [ext_resource type="Texture2D" uid="uid://bk513fh44pa30" path="res://Assets/Sprites/Characters/Enemy Knight/Death/smoke-Fx3_17.png" id="2_2xa48"]
 [ext_resource type="Texture2D" uid="uid://m3xore8wnkak" path="res://Assets/Sprites/Characters/Enemy Knight/Idle/0_Demons_of_Darkness_Idle_001.png" id="2_3d6g6"]
+[ext_resource type="Script" path="res://Scripts/Resources/StatResource.cs" id="2_makg6"]
 [ext_resource type="Texture2D" uid="uid://mnk25kgprwba" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_011.png" id="2_umwup"]
 [ext_resource type="Texture2D" uid="uid://nfvuu8djmcc7" path="res://Assets/Sprites/Characters/Enemy Knight/Idle/0_Demons_of_Darkness_Idle_002.png" id="3_0iy5d"]
 [ext_resource type="Texture2D" uid="uid://cyversjtauf38" path="res://Assets/Sprites/Characters/Enemy Knight/Idle/0_Demons_of_Darkness_Idle_003.png" id="4_mg5qk"]
@@ -94,6 +95,16 @@
 [ext_resource type="Texture2D" uid="uid://d3uua5jitlbf8" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_008.png" id="86_4r3th"]
 [ext_resource type="Texture2D" uid="uid://1jxl71j0a8j1" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_009.png" id="87_jo2nc"]
 [ext_resource type="Texture2D" uid="uid://536ohfufmpxd" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_010.png" id="88_e48oe"]
+
+[sub_resource type="Resource" id="Resource_jaapt"]
+script = ExtResource("2_makg6")
+StatType = 0
+StatValue = 20.0
+
+[sub_resource type="Resource" id="Resource_gnh1n"]
+script = ExtResource("2_makg6")
+StatType = 1
+StatValue = 4.0
 
 [sub_resource type="Animation" id="Animation_rdob5"]
 resource_name = "Attack"
@@ -189,14 +200,16 @@ radius = 2.5
 [sub_resource type="SphereShape3D" id="SphereShape3D_t40e6"]
 radius = 0.96
 
-[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("AnimPlayerNode", "SpriteNode", "StateMachineNode", "AgentNode", "ChaseAreaNode", "AttackAreaNode")]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("AnimPlayerNode", "SpriteNode", "StateMachineNode", "HurtboxNode", "AgentNode", "ChaseAreaNode", "AttackAreaNode")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.826, 0, 0.032)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_l2res")
+stats = Array[Object]([SubResource("Resource_jaapt"), SubResource("Resource_gnh1n")])
 AnimPlayerNode = NodePath("AnimationPlayer")
 SpriteNode = NodePath("Sprite3D")
 StateMachineNode = NodePath("StateMachine")
+HurtboxNode = NodePath("Hurtbox")
 AgentNode = NodePath("NavigationAgent3D")
 ChaseAreaNode = NodePath("ChaseArea")
 AttackAreaNode = NodePath("AttackArea")
@@ -260,3 +273,11 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
 transform = Transform3D(0.999416, -0.0341669, 0, 0.0341669, 0.999416, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("SphereShape3D_t40e6")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.233016, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape3D_gnakt")
