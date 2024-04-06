@@ -26,7 +26,7 @@ public partial class EnemyPatrolState : EnemyState
     protected override void ExitState()
     {
         characterNode.AgentNode.NavigationFinished -= HandleNavigationFinished;
-        idleTimerNode.Timeout += HandleTimeout;
+        idleTimerNode.Timeout -= HandleTimeout;
         characterNode.ChaseAreaNode.BodyEntered -= HandleChaseAreaBodyEntered;
     }
 

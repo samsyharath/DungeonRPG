@@ -12,11 +12,13 @@ public partial class EnemyAttackState : EnemyState
 
         Node3D target = characterNode.AttackAreaNode.GetOverlappingBodies().First();
         targetPosition = target.GlobalPosition;
+
+        characterNode.AnimPlayerNode.AnimationFinished += HandleAnimationFinished;
     }
 
     protected override void ExitState()
     {
-        characterNode.AnimPlayerNode.AnimationFinished-= HandleAnimationFinished;
+        characterNode.AnimPlayerNode.AnimationFinished -= HandleAnimationFinished;
     }
     private void HandleAnimationFinished(StringName animName)
     {
@@ -25,7 +27,9 @@ public partial class EnemyAttackState : EnemyState
 
         if (target == null)
         {
-            Node3D chaseTarget = characterNode.ChaseAreaNode.GetOverlappingBodies().FirstOrDefault();
+            Node3D chaseTarget = characterNode.ChaseAreaNode.
+            GetOverlappingBodies().
+            FirstOrDefault();
 
             if (chaseTarget == null)
             {
@@ -39,13 +43,14 @@ public partial class EnemyAttackState : EnemyState
         characterNode.AnimPlayerNode.Play(GameConstants.ANIM_ATTACK);
         targetPosition = target.GlobalPosition;
 
-        Vector3 direction = characterNode.GlobalPosition.DirectionTo(targetPosition);
+        Vector3 direction = characterNode.GlobalPosition.
+            DirectionTo(targetPosition);
         characterNode.SpriteNode.FlipH = direction.X <0;
     }
 
     private void PerformHit() {
         characterNode.ToggleHitbox(false);
         characterNode.HitBoxNode.GlobalPosition = targetPosition;
-        characterNode.AnimPlayerNode.AnimationFinished += HandleAnimationFinished;
+        
     }
 }
