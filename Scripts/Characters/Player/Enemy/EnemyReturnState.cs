@@ -7,7 +7,6 @@ public partial class EnemyReturnState : EnemyState
     {
         base._Ready();
 
-        destination = GetPointGlobalPosition(0);
     }
     protected override void EnterState()
     {
