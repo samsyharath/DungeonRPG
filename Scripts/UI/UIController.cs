@@ -1,11 +1,13 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 public partial class UIController : Control
 {
     private Dictionary<ContainerType, UIContainer> containers;
+    private bool canPause = false;
 
     public override void _Ready()
     {
@@ -17,10 +19,54 @@ public partial class UIController : Control
         containers[ContainerType.Start].Visible = true;
 
         containers[ContainerType.Start].ButtonNode.Pressed += HandleStartPressed;
+        containers[ContainerType.Pause].ButtonNode.Pressed += HandlePausePressed;
+        GameEvents.OnEndGame += HandleEndGame;
+        GameEvents.OnVictory += HandleVictory;
     }
+
+    private void HandlePausePressed()
+    {
+        GetTree().Paused = false;
+
+        containers[ContainerType.Pause].Visible = false;
+        containers[ContainerType.Stats].Visible = true;
+    }
+
+
+    public override void _Input(InputEvent @event)
+    {
+        if (!canPause) {return;}
+        
+        if (!Input.IsActionJustPressed(GameConstants.INPUT_PAUSE))
+        {
+            return;
+        }
+
+        containers[ContainerType.Stats].Visible = GetTree().Paused;
+        GetTree().Paused = !GetTree().Paused;
+        containers[ContainerType.Pause].Visible = GetTree().Paused;
+    }
+
+    private void HandleVictory()
+    {
+        containers[ContainerType.Stats].Visible = false;
+        containers[ContainerType.Victory].Visible = true;
+        GetTree().Paused = true;
+        canPause = false;
+    }
+
+
+    private void HandleEndGame()
+    {
+        containers[ContainerType.Stats].Visible = false;
+        containers[ContainerType.Defeat].Visible = true;
+        canPause = false;
+    }
+
 
     private void HandleStartPressed()
     {
+        canPause = true;
         GetTree().Paused = false;
         containers[ContainerType.Start].Visible = false;
         containers[ContainerType.Stats].Visible = true;
