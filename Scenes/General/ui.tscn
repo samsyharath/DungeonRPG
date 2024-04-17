@@ -139,6 +139,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_r8xh1")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/Strength"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 4.0
 offset_right = 76.0
@@ -165,6 +166,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_r8xh1")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/EnemyCount"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 4.0
 offset_right = 76.0
@@ -316,7 +318,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_wh10t")
 theme_override_styles/focus = SubResource("StyleBoxTexture_wh10t")
 text = "CONTINUE"
 
-[node name="Reward" type="PanelContainer" parent="." node_paths=PackedStringArray("ButtonNode")]
+[node name="Reward" type="PanelContainer" parent="." node_paths=PackedStringArray("ButtonNode", "TextureNode", "LabelNode")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -333,7 +335,9 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_nw8g0")
 script = ExtResource("2_jhj8o")
 container = 5
-ButtonNode = NodePath("../Pause/MarginContainer/VBoxContainer/Button")
+ButtonNode = NodePath("MarginContainer/VBoxContainer/VBoxContainer/Button")
+TextureNode = NodePath("MarginContainer/VBoxContainer/VBoxContainer/TextureRect")
+LabelNode = NodePath("MarginContainer/VBoxContainer/VBoxContainer/RewardText")
 
 [node name="MarginContainer" type="MarginContainer" parent="Reward"]
 layout_mode = 2
